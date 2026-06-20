@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Smart File Organizer Pro</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>
+            📁 Smart File Organizer Pro
+        </h1>
+
+        <p>
+            Python + OS + Shutil Automation Project
+        </p>
+
+    </div>
+
+    <div class="form-card">
+
+        <form method="POST">
+
+            <input
+                type="text"
+                name="folder_path"
+                placeholder="Enter Folder Path (Example: E:\Downloads)"
+                required
+            >
+
+            <div class="btn-group">
+
+                <button
+                    type="submit"
+                    name="action"
+                    value="scan">
+
+                    Scan Files
+
+                </button>
+
+                <button
+                    type="submit"
+                    name="action"
+                    value="organize">
+
+                    Organize Files
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    {% if result %}
+
+        {% if result.error %}
+
+            <div class="error-box">
+
+                <h2>Error</h2>
+
+                <p>{{ result.error }}</p>
+
+            </div>
+
+        {% else %}
+
+        <div class="stats-container">
+
+            <div class="card">
+                <h3>Images</h3>
+                <h1>{{ result.images }}</h1>
+            </div>
+
+            <div class="card">
+                <h3>Documents</h3>
+                <h1>{{ result.documents }}</h1>
+            </div>
+
+            <div class="card">
+                <h3>Audio</h3>
+                <h1>{{ result.audio }}</h1>
+            </div>
+
+            <div class="card">
+                <h3>Videos</h3>
+                <h1>{{ result.videos }}</h1>
+            </div>
+
+            <div class="card">
+                <h3>Archives</h3>
+                <h1>{{ result.archives }}</h1>
+            </div>
+
+            <div class="card">
+                <h3>Others</h3>
+                <h1>{{ result.others }}</h1>
+            </div>
+
+        </div>
+
+        <div class="folder-info">
+
+            <h2>
+                Selected Folder
+            </h2>
+
+            <p>
+                {{ result.folder }}
+            </p>
+
+        </div>
+
+        {% if result.logs %}
+
+        <div class="table-container">
+
+            <h2>
+                Activity Log
+            </h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>#</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for log in result.logs %}
+
+                    <tr>
+
+                        <td>
+                            {{ loop.index }}
+                        </td>
+
+                        <td>
+                            {{ log }}
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% endif %}
+
+        {% endif %}
+
+    {% endif %}
+
+</div>
+
+</body>
+
+</html>
