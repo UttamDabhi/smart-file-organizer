@@ -13,3 +13,14 @@ venv/
 Thumbs.db
 
 analysis_result.txt
+
+
+
+TestFiles/
+
+*.mp4
+*.jpg
+*.jpeg
+*.png
+*.pdf
+*.xlsx
